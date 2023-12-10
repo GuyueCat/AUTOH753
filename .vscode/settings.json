@@ -56,5 +56,16 @@
   "C_Cpp_Runner.useLeakSanitizer": false,
   "C_Cpp_Runner.showCompilationTime": false,
   "C_Cpp_Runner.useLinkTimeOptimization": false,
-  "C_Cpp_Runner.msvcSecureNoWarnings": false
+  "C_Cpp_Runner.msvcSecureNoWarnings": false,
+  "files.associations": {
+    "bsp_log.h": "c",
+    "bsp_dwt.h": "c",
+    "memory.h": "c",
+    "main.h": "c",
+    "bsp_can.h": "c",
+    "stdint.h": "c",
+    "can.h": "c",
+    "stm32h7xx_hal.h": "c",
+    "stdlib.h": "c"
+  }
 }
