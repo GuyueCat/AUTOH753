@@ -66,6 +66,11 @@
     "stdint.h": "c",
     "can.h": "c",
     "stm32h7xx_hal.h": "c",
-    "stdlib.h": "c"
+    "stdlib.h": "c",
+    "usb_device.h": "c",
+    "usbd_def.h": "c",
+    "usbd_conf.h": "c",
+    "stm32h7xx.h": "c",
+    "net_connect.h": "c"
   }
 }

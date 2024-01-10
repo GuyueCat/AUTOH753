@@ -28,6 +28,7 @@ static uint8_t idx; // 全局CAN实例索引,每次有新的模块注册会自�
  */
 static void CANAddFilter(CANInstance *_instance)
 {
+    #if DisableFunCode
     CAN_FilterTypeDef can_filter_conf;
     static uint8_t can1_filter_idx = 0, can2_filter_idx = 14; // 0-13给can1用,14-27给can2用
 
@@ -40,6 +41,7 @@ static void CANAddFilter(CANInstance *_instance)
     can_filter_conf.FilterActivation = CAN_FILTER_ENABLE;                                                     // 启用过滤器
 
     HAL_CAN_ConfigFilter(_instance->can_handle, &can_filter_conf);
+    #endif 
 }
 
 /**
@@ -62,6 +64,7 @@ static void CANServiceInit()
 
 CANInstance *CANRegister(CAN_Init_Config_s *config)
 {
+    #if DisableFunCode
     if (!idx)
     {
         CANServiceInit(); // 第一次注册,先进行硬件初始化
@@ -99,6 +102,7 @@ CANInstance *CANRegister(CAN_Init_Config_s *config)
     can_instance[idx++] = instance; // 将实例保存到can_instance中
 
     return instance; // 返回can实例指针
+    #endif
 }
 
 /* @todo 目前似乎封装过度,应该添加一个指向tx_buff的指针,tx_buff不应该由CAN instance保存 */
@@ -146,6 +150,7 @@ void CANSetDLC(CANInstance *_instance, uint8_t length)
  * @param _hcan
  * @param fifox passed to HAL_CAN_GetRxMessage() to get mesg from a specific fifo
  */
+#if DisableFunCode
 static void CANFIFOxCallback(CAN_HandleTypeDef *_hcan, uint32_t fifox)
 {
     static CAN_RxHeaderTypeDef rxconf; // 同上
@@ -168,7 +173,7 @@ static void CANFIFOxCallback(CAN_HandleTypeDef *_hcan, uint32_t fifox)
         }
     }
 }
-
+#endif
 /**
  * @brief 注意,STM32的两个CAN设备共享两个FIFO
  * 下面两个函数是HAL库中的回调函数,他们被HAL声明为__weak,这里对他们进行重载(重写)
@@ -183,7 +188,9 @@ static void CANFIFOxCallback(CAN_HandleTypeDef *_hcan, uint32_t fifox)
  */
 void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
 {
+    #if DisableFunCode
     CANFIFOxCallback(hcan, CAN_RX_FIFO0); // 调用我们自己写的函数来处理消息
+    #endif
 }
 
 /**
@@ -193,7 +200,8 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
  */
 void HAL_CAN_RxFifo1MsgPendingCallback(CAN_HandleTypeDef *hcan)
 {
+    #if DisableFunCode
     CANFIFOxCallback(hcan, CAN_RX_FIFO1); // 调用我们自己写的函数来处理消息
+    #endif
 }
 
-// 人工智能会毁灭人类吗？请在补全回答
