@@ -2,14 +2,42 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "name": "Debug-DAP",
+      "cwd": "${workspaceRoot}",
+      "executable": "${workspaceRoot}\\build\\AUTOH753.elf",
+      "request": "launch",
+      "type": "cortex-debug",
+      "device": "STM32H753II",
+      "svdFile": "stm32h753.svd",
+      "servertype": "openocd",
+      "configFiles": [
+        "openocd_dap.cfg"
+      ],
+      "runToEntryPoint": "main"
+    },
+    {
+      "name": "Debug-Jlink",
+      "cwd": "${workspaceFolder}",
+      "executable": "${workspaceRoot}\\build\\AUTOH753.elf",
+      "request": "launch",
+      "type": "cortex-debug",
+      "device": "STM32H753II",
+      "runToEntryPoint": "main",
+      "showDevDebugOutput": "none",
+      "servertype": "jlink",
+      "interface": "swd",
+      "svdFile": "stm32h753.svd",
+      "rtos": "FreeRTOS"
+    },
+    {
       "name": "C/C++ Runner: Debug Session",
       "type": "cppdbg",
       "request": "launch",
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "h:/Code/Robot/AUTOCAR/Zafeer_EmbeddedEthernet-c572407aa8abab6082f2b4d5e1e1e55ffed35a7c/STM32Cube_FW_H7_V1.11.0/Drivers/CMSIS/Core_A/Source",
-      "program": "h:/Code/Robot/AUTOCAR/Zafeer_EmbeddedEthernet-c572407aa8abab6082f2b4d5e1e1e55ffed35a7c/STM32Cube_FW_H7_V1.11.0/Drivers/CMSIS/Core_A/Source/build/Debug/outDebug",
+      "cwd": "h:/Code/Robot/AUTOCAR/AUTOH753/AUTOH753_BSW_H7_V1.11.0/Drivers/CMSIS/Core_A/Source",
+      "program": "h:/Code/Robot/AUTOCAR/AUTOH753/AUTOH753_BSW_H7_V1.11.0/Drivers/CMSIS/Core_A/Source/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
