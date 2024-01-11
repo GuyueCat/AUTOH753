@@ -37,9 +37,8 @@ BUILD_DIR = build
 ######################################
 # C sources
 C_SOURCES =  \
-Projects/STM32H743I-EVAL/Applications/EEPROM/EEPROM_Emulation/Src/main.c \
-Projects/STM32H743I-EVAL/Applications/EEPROM/EEPROM_Emulation/Src/eeprom.c \
-Projects/STM32H743I-EVAL/Applications/EEPROM/EEPROM_Emulation/Src/stm32h7xx_it.c \
+Projects/STM32H743I-EVAL/Applications/FreeRTOS/FreeRTOS_MPU/Src/main.c \
+Projects/STM32H743I-EVAL/Applications/FreeRTOS/FreeRTOS_MPU/Src/system_stm32h7xx.c \
 Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal.c \
 Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_adc.c \
 Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_adc_ex.c \
@@ -164,7 +163,21 @@ Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_ll_tim.c \
 Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_ll_usart.c \
 Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_ll_usb.c \
 Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_ll_utils.c \
-Projects/STM32H743I-EVAL/Applications/EEPROM/EEPROM_Emulation/Src/system_stm32h7xx.c \
+Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_ll_utils.c \
+Drivers/BSP/STM32H743I-EVAL/stm32h743i_eval.c \
+Drivers/BSP/STM32H743I-EVAL/stm32h743i_eval_audio.c \
+Drivers/BSP/STM32H743I-EVAL/stm32h743i_eval_bus.c \
+Drivers/BSP/STM32H743I-EVAL/stm32h743i_eval_eeprom.c \
+Drivers/BSP/STM32H743I-EVAL/stm32h743i_eval_io.c \
+Drivers/BSP/STM32H743I-EVAL/stm32h743i_eval_lcd.c \
+Drivers/BSP/STM32H743I-EVAL/stm32h743i_eval_nor.c \
+Drivers/BSP/STM32H743I-EVAL/stm32h743i_eval_qspi.c \
+Drivers/BSP/STM32H743I-EVAL/stm32h743i_eval_sd.c \
+Drivers/BSP/STM32H743I-EVAL/stm32h743i_eval_sdram.c \
+Drivers/BSP/STM32H743I-EVAL/stm32h743i_eval_sram.c \
+Drivers/BSP/STM32H743I-EVAL/stm32h743i_eval_ts.c \
+Projects/STM32H743I-EVAL/Applications/FreeRTOS/FreeRTOS_MPU/Src/stm32h7xx_hal_timebase_tim.c \
+Projects/STM32H743I-EVAL/Applications/FreeRTOS/FreeRTOS_MPU/Src/stm32h7xx_it.c \
 Middlewares/Third_Party/FreeRTOS/Source/croutine.c \
 Middlewares/Third_Party/FreeRTOS/Source/event_groups.c \
 Middlewares/Third_Party/FreeRTOS/Source/list.c \
@@ -184,7 +197,7 @@ Middlewares/Third_Party/SEGGER/RTT/SEGGER_RTT.c
 
 # ASM sources
 ASM_SOURCES =  \
-startup_stm32h753xx.s
+startup_stm32h743xx.s \
 Middlewares/Third_Party/SEGGER/RTT/SEGGER_RTT_ASM_ARMv7M.s 
 
 #######################################
@@ -229,20 +242,20 @@ AS_DEFS =
 # C defines
 C_DEFS =  \
 -DUSE_HAL_DRIVER \
--DSTM32H753xx \
+-DSTM32H743xx \
 -DARM_MATH_CM7 \
 -DARM_MATH_MATRIX_CHECK \
 -DARM_MATH_ROUNDING 
 
 # AS includes
 AS_INCLUDES =  \
--IInc
+-IDrivers/STM32F4xx_HAL_Driver/Inc
 
 # C includes
 C_INCLUDES =  \
--IInc \
 -IDrivers/STM32H7xx_HAL_Driver/Inc \
--IDrivers/STM32H7xx_HAL_Driver/Inc/Legacy \
+-IDrivers/BSP/STM32H743I-EVAL \
+-IProjects/STM32H743I-EVAL/Applications/FreeRTOS/FreeRTOS_MPU/Inc \
 -IMiddlewares/Third_Party/FreeRTOS/Source/include \
 -IMiddlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS \
 -IMiddlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F \
@@ -268,7 +281,7 @@ CFLAGS += -MMD -MP -MF"$(@:%.o=%.d)"
 # LDFLAGS
 #######################################
 # link script
-LDSCRIPT = STM32H753XIHX_FLASH.ld
+LDSCRIPT = STM32H743XIHX_FLASH.ld
 
 # libraries
 LIBS = -lc -lm -lnosys  \
